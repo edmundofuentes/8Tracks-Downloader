@@ -67,8 +67,8 @@ curl_close($albcurl);
 $alb = json_decode($albdata,true);
 
 echo $alb['mix']['name'].'<br/>'.$alb['mix']['description'];
-echo '<br/><br/><a href="http://8tracks.com'.$alb['mix']['path'].'"><img src="'.$alb['mix']['cover_urls']['sq133'].'"/></a><br/><br/>';
-echo '<table border="1">';
+echo '<br/><br/><div class="myimg"><a href="http://8tracks.com'.$alb['mix']['path'].'"><img src="'.$alb['mix']['cover_urls']['sq133'].'"/></a></div><br/><br/>';
+echo '<div class="mytab"><table border="1">';
 }
 
 $at_end='false';
@@ -77,7 +77,7 @@ while($at_end=='false')
 {
 if(isset($_POST["show"])&&$_POST["show"]=="Yes")
 {
-echo '<tr><td><a href="'.$obj['set']['track']['url'].'">'.$obj['set']['track']['name'].'</a></td></tr>';
+echo '<tr><td><a href="'.$obj['set']['track']['url'].'">'.$obj['set']['track']['name'].'</a><br/>'.$obj['set']['track']['performer'].'</td></tr>';
 }
 else
 {
@@ -106,6 +106,7 @@ if(isset($_POST["show"])&&$_POST["show"]=="Yes")
 {
 echo '</table></div>
 </form>
+</div>
 </div>
 </div>
 </div>
