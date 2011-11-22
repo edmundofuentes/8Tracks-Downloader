@@ -4,6 +4,11 @@
 Thankfully though, it is very easy to get music from the site.
 
 This is a simple Playlist downloader for 8Tracks
-Simply change the $playlist variable in index.php and run the file... It downloads the entire playlist to the "songs" folder
+<strike> Simply change the $playlist variable in index.php and run the file... It downloads the entire playlist to the "songs" folder</strike>
+Check Update
 
-->Hack developed overnight using PHP+CURL+XAMPP and while listening to The Awkward Moment when the Remix is better than the Original... (http://8tracks.com/awhit10/the-awkward-moment-when-the-remix-is-better-than-the-original) :) :)
+Hack developed overnight using PHP+CURL+XAMPP and while listening to The Awkward Moment when the Remix is better than the Original... (http://8tracks.com/awhit10/the-awkward-moment-when-the-remix-is-better-than-the-original) :) :)
+
+UPDATE:
+Added a UI (?). All you have to do is input playlist URL in homepage and click download! :)
+Here's a peek at the simplified UI: http://brizzly.com/pic/4S3U 

@@ -1,65 +1,31 @@
-<?php
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 
-//FIND PLAYLIST ID FROM PLAYLIST URL
-$playlist='http://8tracks.com/aca31692/how-dubstep-stole-christmas-pt-1';
-$curl = curl_init($playlist);
-curl_setopt($curl, CURLOPT_URL, $playlist);
-curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-$header = curl_exec($curl);
-curl_close($curl);
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="Stay offline!" />
 
-list($discard,$actdat)=explode('mixes/',$header);
-list($playlistid,$discard)=explode('/',$actdat);
+<title> 8Tracks Playlist Downloader</title>
+<link rel="stylesheet" href="style/style.css" type="text/css"/>
+</head>
+<body>
+<div id="page">
+<div id="body">
+<div id="header">
+ <img src="style/header.jpg" border="0" align="centre"/>
+ </div>
+<form id="form" action="download.php" class="bold_form signup_form" method="post">
+PLAYLIST URL<br/> 
+<span class="field">
+<input type="text" id="playlist" name="playlist" />
+</span>
+<p/>
+<p class="submit">
+<input type="submit" class="button alt_button" value="DOWNLOAD" />
+</p>
+</form>
+</div>
+</div>
 
-//GENERATE NEW PLAYTOKEN
-$playtoken='http://8tracks.com/sets/new.json';
-$curl = curl_init($playtoken);
-curl_setopt($curl, CURLOPT_URL,$playtoken);
-curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-$playid = curl_exec($curl);
-curl_close($curl);
-
-$obj = json_decode($playid,true);
-
-//var_dump($obj);
-$token=$obj['play_token'];
-
-//GENERATE INITIAL PLAY LINK
-$playurl= 'http://8tracks.com/sets/'.$token.'/play?mix_id='.$playlistid.'&format=jsonh';
-echo $playurl;
-
-$songcurl = curl_init($playurl);
-curl_setopt($songcurl, CURLOPT_URL,$playurl);
-curl_setopt($songcurl, CURLOPT_RETURNTRANSFER, true);
-$songdata = curl_exec($songcurl);
-curl_close($songcurl);
-
-$obj = json_decode($songdata,true);
-
-$at_end='false';
-//RECURSIVELY PLAY/DOWNLOAD SONGS
-while($at_end=='false')
-{
-echo $obj['set']['track']['name']."<br/>".$obj['set']['at_end'].'<br/>';
-$songfile = file_get_contents($obj['set']['track']['url']);
-file_put_contents('songs/'.$obj['set']['track']['name'].'.m4a',$songfile);
-
-//GET NEXT SONG
-$playurl= 'http://8tracks.com/sets/'.$token.'/next?mix_id='.$playlistid.'&format=jsonh';
-echo $playurl;
-
-$songcurl = curl_init($playurl);
-curl_setopt($songcurl, CURLOPT_URL,$playurl);
-curl_setopt($songcurl, CURLOPT_RETURNTRANSFER, true);
-$songdata = curl_exec($songcurl);
-curl_close($songcurl);
-
-$obj = json_decode($songdata,true);
-
-
-//CHECK IF AT END OF PLAYLIST
-if($obj['set']['at_end'])
-$at_end= 'true';
-}
- ?>
-
+</body>
+</html> 
