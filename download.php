@@ -2,20 +2,13 @@
 
 //FIND PLAYLIST ID FROM PLAYLIST URL
 $playlist=$_POST["playlist"];
-<<<<<<< HEAD
-=======
-echo $playlist;
->>>>>>> 42c6959a756ef3aaf683aaf9c9c8dc5eae6a1e5d
+//echo $playlist;
 $curl = curl_init($playlist);
 curl_setopt($curl, CURLOPT_URL, $playlist);
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 $header = curl_exec($curl);
 curl_close($curl);
-<<<<<<< HEAD
 
-=======
-/*
->>>>>>> 42c6959a756ef3aaf683aaf9c9c8dc5eae6a1e5d
 list($discard,$actdat)=explode('mixes/',$header);
 list($playlistid,$discard)=explode('/',$actdat);
 
@@ -34,7 +27,7 @@ $token=$obj['play_token'];
 
 //GENERATE INITIAL PLAY LINK
 $playurl= 'http://8tracks.com/sets/'.$token.'/play?mix_id='.$playlistid.'&format=jsonh';
-echo $playurl;
+//echo $playurl;
 
 $songcurl = curl_init($playurl);
 curl_setopt($songcurl, CURLOPT_URL,$playurl);
@@ -48,13 +41,13 @@ $at_end='false';
 //RECURSIVELY PLAY/DOWNLOAD SONGS
 while($at_end=='false')
 {
-echo $obj['set']['track']['name']."<br/>".$obj['set']['at_end'].'<br/>';
+echo $obj['set']['track']['name'].'<br/>';
 $songfile = file_get_contents($obj['set']['track']['url']);
 file_put_contents('songs/'.$obj['set']['track']['name'].'.m4a',$songfile);
 
 //GET NEXT SONG
 $playurl= 'http://8tracks.com/sets/'.$token.'/next?mix_id='.$playlistid.'&format=jsonh';
-echo $playurl;
+//echo $playurl;
 
 $songcurl = curl_init($playurl);
 curl_setopt($songcurl, CURLOPT_URL,$playurl);
@@ -68,10 +61,8 @@ $obj = json_decode($songdata,true);
 //CHECK IF AT END OF PLAYLIST
 if($obj['set']['at_end'])
 $at_end= 'true';
-<<<<<<< HEAD
+
 }
-=======
-}*/
->>>>>>> 42c6959a756ef3aaf683aaf9c9c8dc5eae6a1e5d
- ?>
+}
+?>
 
