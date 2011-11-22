@@ -1,0 +1,52 @@
+/* RESET */
+html, body, div, span, object, iframe, 
+h1, h2, h3, h4, h5, h6, p, blockquote, pre, 
+a, abbr, acronym, address, big, cite, code, del, dfn, em, 
+img, ins, kbd, q, samp, small, strike, strong, sub, sup, 
+tt, var, dl, dt, dd, ol, ul, li, 
+fieldset, form, label, legend, 
+table, caption, tbody, tfoot, thead, tr, th, td {margin:0;padding:0;border:0;outline:0;vertical-align:baseline;background:transparent;}
+table {border-spacing:0;border-collapse:collapse;}
+caption, th, td {text-align:left;font-weight:normal;}
+blockquote, q {quotes:none;}
+:focus {outline:0;}
+a {text-decoration:none;}
+a:hover {text-decoration:underline;}
+body {background:#333;font-family:'Lucida Grande', tahoma, verdana, arial, sans-serif;font-size:12px;line-height:18px;color:#fff;}
+img {-ms-interpolation-mode:bicubic;}
+
+
+
+/* INPUTS */
+input, textarea {margin:0;padding:5px;width:80%;border:1px solid #aaa;background:#fff;font-family:'lucida grande', tahoma, verdana, arial, sans-serif;font-size:12px;line-height:16px;color:#333;border-radius:2px;-moz-border-radius:2px;-webkit-box-shadow:inset 0 1px 0 rgba(0,0,0,.1);-moz-box-shadow:inset 0 1px 0 rgba(0,0,0,.1);-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
+textarea {width:100%;height:200px;}
+textarea:focus, input:focus {border:1px solid #74b5dc;color:#000;}
+input[type=submit] {border:1px solid #74b5dc;color:#000;}
+input[type=hidden] {display:none;}
+input[type=image] {display:none; width:30%;}
+
+
+
+/* BOLD FORM */
+.bold_form p {margin-bottom:15px;}
+.bold_form label {display:block;margin-bottom:5px;font-size:13px;font-weight:normal;color:#999;}
+.bold_form label small {font-size:13px;}
+.bold_form label small a {color:#6da2c3;}
+.bold_form input {display:block;padding:8px;width:100%;font-size:25px;border:none;}
+.bold_form input:focus {padding:8px;}
+.bold_form .submit:after {content:".";display:block;height:0;clear:both;visibility:hidden;}
+.bold_form .submit button {display:block;float:right;padding:10px 30px;font-size:13px;font-weight:normal;}
+.bold_form .submit .alt_button {display:block;float:right;padding:15px 30px;font-size:13px;font-weight:bold;background:#444;border-color:#444;-moz-box-shadow:none;-webkit-box-shadow:none;color:#888;}
+
+
+
+
+/* BACKGROUNDS */
+body,
+body#theme_1 {background:#000000 url(images/backgrounds/green.png) 0 0 repeat-x;}
+
+/* BODY */
+#body {position:relative;margin:0 auto;padding-top:65px;width:1050px;zoom:1;}
+#header{position:relative;margin:0 auto;padding-left:30%;zoom:1;}
+#body:after {content:".";display:block;height:0;clear:both;visibility:hidden;}
+
