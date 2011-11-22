@@ -2,12 +2,20 @@
 
 //FIND PLAYLIST ID FROM PLAYLIST URL
 $playlist=$_POST["playlist"];
+<<<<<<< HEAD
+=======
+echo $playlist;
+>>>>>>> 42c6959a756ef3aaf683aaf9c9c8dc5eae6a1e5d
 $curl = curl_init($playlist);
 curl_setopt($curl, CURLOPT_URL, $playlist);
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 $header = curl_exec($curl);
 curl_close($curl);
+<<<<<<< HEAD
 
+=======
+/*
+>>>>>>> 42c6959a756ef3aaf683aaf9c9c8dc5eae6a1e5d
 list($discard,$actdat)=explode('mixes/',$header);
 list($playlistid,$discard)=explode('/',$actdat);
 
@@ -60,6 +68,10 @@ $obj = json_decode($songdata,true);
 //CHECK IF AT END OF PLAYLIST
 if($obj['set']['at_end'])
 $at_end= 'true';
+<<<<<<< HEAD
 }
+=======
+}*/
+>>>>>>> 42c6959a756ef3aaf683aaf9c9c8dc5eae6a1e5d
  ?>
 
