@@ -23,6 +23,9 @@ PLAYLIST URL<br/>
 <p class="submit">
 <input type="submit" class="button alt_button" value="DOWNLOAD" />
 </p>
+<div id="header">
+<input type="checkbox" name="show" value="Yes" />SHOW PLAYLIST
+</div>
 </form>
 </div>
 </div>
