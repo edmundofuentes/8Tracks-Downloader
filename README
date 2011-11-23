@@ -12,3 +12,8 @@ Hack developed overnight using PHP+CURL+XAMPP and while listening to The Awkward
 UPDATE:
 Added a UI (?). All you have to do is input playlist URL in homepage and click download! :)
 Here's a peek at the simplified UI: http://brizzly.com/pic/4S3U 
+
+UPDATE 2:
+8Tracks used to provide 64K m4a (still does infact), though their primary server now encodes into 48K ...This provides smaller filesize, but less quality. So have added support for 64K encoded downloads.
+Updated UI: http://brizzly.com/pic/4S4Q (Just check HIGH QUALITY to download 64K m4a's)
+Maintaining 64K encoding works out pretty costly for the 8Tracks team ( http://groups.google.com/group/8tracks-public-api/browse_thread/thread/14da42858b928b88# ) so I don't know how long they'll support it for! But while they do, enjoy! :)
