@@ -66,9 +66,9 @@ curl_close($albcurl);
 
 $alb = json_decode($albdata,true);
 
-echo $alb['mix']['name'].'<br/>'.$alb['mix']['description'];
-echo '<br/><br/><div class="myimg"><a href="http://8tracks.com'.$alb['mix']['path'].'"><img src="'.$alb['mix']['cover_urls']['sq133'].'"/></a></div><br/><br/>';
-echo '<div class="mytab"><table border="1">';
+echo '<div class="title"><h3>'.$alb['mix']['name'].'</h3></div><br/><div class="desc"><h4>'.$alb['mix']['description'];
+echo '</h4></div><br/><br/><div class="myimg"><a href="http://8tracks.com'.$alb['mix']['path'].'"><img src="'.$alb['mix']['cover_urls']['sq133'].'"/></a></div><br/><br/>';
+echo '<div class="mytab"> <h3>Song List: </h3><br/><table border="1">';
 }
 
 $at_end='false';

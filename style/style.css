@@ -24,6 +24,17 @@ text-align:center;
 vertical-align:bottom;
 }
 
+.title
+{
+text-decoration:none;color:#fff;text-transform: uppercase;
+} 
+
+.desc
+{
+position:relative;
+top: -25	px;
+text-decoration:none;color:#fff;
+} 
 .myimg
 {
 position:relative;
@@ -34,7 +45,7 @@ left:-26%;
 .mytab
 {
 position:relative;
-top: -150px;
+top: -190px;
 } 
 
 
