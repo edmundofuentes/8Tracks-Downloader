@@ -10,6 +10,12 @@ curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 $header = curl_exec($curl);
 curl_close($curl);
 
+//HIGH QUALITY
+if(isset($_POST["highq"])&&$_POST["highq"]=="Yes")
+$highq='yes';
+else
+$highq='no';
+
 list($discard,$actdat)=explode('mixes/',$header);
 list($playlistid,$discard)=explode('/',$actdat);
 
@@ -70,19 +76,37 @@ echo '<div class="title"><h3>'.$alb['mix']['name'].'</h3></div><br/><div class="
 echo '</h4></div><br/><br/><div class="myimg"><a href="http://8tracks.com'.$alb['mix']['path'].'"><img src="'.$alb['mix']['cover_urls']['sq133'].'"/></a></div><br/><br/>';
 echo '<div class="mytab"> <h3>Song List: </h3><br/><table border="1">';
 }
+else
+{
+//if (file_exists('songs/'.$playlistid.'.zip'))
+//header( 'Location: songs/'.$playlistid.'.zip' );
+//else
+//{
+//$zip = new ZipArchive();
+//$zip->open($playlistid.'.zip', ZipArchive::CREATE);
+//}
+}  
 
 $at_end='false';
 //RECURSIVELY PLAY/DOWNLOAD SONGS
 while($at_end=='false')
 {
+//RIGHT NOW 8Tracks provides 64K and 48K ENCODING... I OBVIOUSLY PREFER 64K ENCODING
+//DUNNO HOW LONG THIS WILL LAST THOUGH... http://groups.google.com/group/8tracks-public-api/browse_thread/thread/14da42858b928b88#
+if($highq == 'yes')
+$song= str_replace("48k.v2.m4a","64k.m4a",$obj['set']['track']['url']);
+else
+$song=$obj['set']['track']['url'];
+
 if(isset($_POST["show"])&&$_POST["show"]=="Yes")
 {
-echo '<tr><td><a href="'.$obj['set']['track']['url'].'">'.$obj['set']['track']['name'].'</a><br/>'.$obj['set']['track']['performer'].'</td></tr>';
+echo '<tr><td><a href="'.$song.'">'.$obj['set']['track']['name'].'</a><br/>'.$obj['set']['track']['performer'].'</td></tr>';
 }
 else
 {
-$songfile = file_get_contents($obj['set']['track']['url']);
+$songfile = file_get_contents($song);
 file_put_contents('songs/'.$obj['set']['track']['name'].'.m4a',$songfile);
+//$zip->addFile($songfile,$obj['set']['track']['name'].'.m4a');
 }
 //GET NEXT SONG
 $playurl= 'http://8tracks.com/sets/'.$token.'/next?mix_id='.$playlistid.'&format=jsonh';
@@ -95,7 +119,7 @@ $songdata = curl_exec($songcurl);
 curl_close($songcurl);
 
 $obj = json_decode($songdata,true);
-
+//unlink('songs/'.$obj['set']['track']['name'].'.m4a');
 
 //CHECK IF AT END OF PLAYLIST
 if($obj['set']['at_end'])
@@ -113,6 +137,10 @@ echo '</table></div>
 </body>
 </html> ';
 }
+else
+{
+	//$zip->close();
+	 //header( 'Location: /tmp/'.$playlistid.'.zip' ) ;
+}
 
 ?>
-
