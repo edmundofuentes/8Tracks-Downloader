@@ -8,6 +8,7 @@ This is a simple Playlist downloader for 8Tracks.
 a. Initialize your web server. I recommend WAMP for Windows and MAMP Mac OS X because they are very simple and easy to set up.
 b. Copy the 8tracks-downloader folder to your web root folder.
 c. Make sure that the 8tracks-downloader permissions are set to 0777.
+d. WINDOWS USERS: You might need to enable/install the cURL library. Try this guide first [ http://www.webtechquery.com/index.php/2010/03/fatal-error-call-to-undefined-function-curl_init-windows-and-linux-ubuntu/ ], it'll solve most problems related to cURL.
 
 1. Go to http://localhost/8tracks-downloader in your web browser.
 2. Type in the playlist's URL and your API Key (it must be valid), and click "Analyze".
