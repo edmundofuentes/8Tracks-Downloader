@@ -14,21 +14,22 @@
 <div id="header">
  <img src="style/header.jpg" border="0" align="centre"/>
  </div>
-<form id="form" action="download.php" class="bold_form signup_form" method="post">
-PLAYLIST URL<br/> 
-<span class="field">
-<input type="text" id="playlist" name="playlist" />
-</span>
+<form id="form" action="show.php" class="bold_form signup_form" method="post">
+<p>
+ Playlist URL<br/> 
+ <span class="field">
+  <input type="text" id="playlist" name="playlist" />
+ </span>
+<p/>
+<p>
+ Developer API Key <a href="http://8tracks.com/developers/new" target="_blank"><b>[?]</b></a><br/> 
+ <span class="field">
+  <input type="text" id="api_key" name="api_key" />
+ </span>
 <p/>
 <p class="submit">
-<input type="submit" class="button alt_button" value="DOWNLOAD" />
+<input type="submit" class="button alt_button" value="ANALYZE" />
 </p>
-<div id="header">
-<input type="checkbox" name="show" value="Yes" />SHOW PLAYLIST
-</div>
-<div id="header">
-<input type="checkbox" name="highq" value="Yes" />HIGH QUALITY
-</div>
 </form>
 </div>
 </div>

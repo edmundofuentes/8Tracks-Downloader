@@ -1,8 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="Stay offline!" />
+
+<title>Downloading 8Tracks Playlist...</title>
+<link rel="stylesheet" href="style/style.css" type="text/css"/>
+</head>
+<body>
+<div id="page">
+    <div id="body">
+        <div id="header">
+            <img src="style/header.jpg" border="0" align="centre"/>
+        </div>
+        <div align="center"><br/><br/>
+            <div class="desc">
+                <!-- TRICK BROWSER TO SHOW PAGE BEFORE LOADING...
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Maecenas aliquam leo a nulla volutpat sit amet egestas nunc tincidunt.
+                Pellentesque sed risus ipsum. Morbi tellus eros, sagittis consectetur tristique vitae,
+                imperdiet at magna. Maecenas dapibus cursus scelerisque.
+                Nunc eget urna at purus volutpat venenatis hendrerit in quam.
+                Aliquam pulvinar libero eget tortor scelerisque sit amet dictum leo accumsan.
+                Integer a quam lorem. Suspendisse potenti.
+                Suspendisse fermentum nunc ut augue suscipit a convallis leo euismod.
+                Praesent mollis facilisis magna vel adipiscing.
+                Cum sociis natoque penatibus et magnis dis parturient montes,
+                nascetur ridiculus mus. Curabitur blandit bibendum metus,
+                quis imperdiet ligula eleifend eget.
+                -->
+
 <?php
+// based on: https://github.com/navinpai/8Tracks-Downloader
+// by: mundofr http://github.com/mundofr
+// feb 2012
 
 
 //FIND PLAYLIST ID FROM PLAYLIST URL
-$playlist=$_POST["playlist"];
+$playlist= isset($_POST['playlist'])? $_POST['playlist'] : 0;
 //echo $playlist;
 $curl = curl_init($playlist);
 curl_setopt($curl, CURLOPT_URL, $playlist);
@@ -10,17 +46,12 @@ curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 $header = curl_exec($curl);
 curl_close($curl);
 
-//HIGH QUALITY
-if(isset($_POST["highq"])&&$_POST["highq"]=="Yes")
-$highq='yes';
-else
-$highq='no';
-
 list($discard,$actdat)=explode('mixes/',$header);
 list($playlistid,$discard)=explode('/',$actdat);
 
 //GENERATE NEW PLAYTOKEN
-$playtoken='http://8tracks.com/sets/new.json';
+$api_key = isset($_POST['api_key'])? $_POST['api_key'] : 0; ### ADDED: API Key
+$playtoken='http://8tracks.com/sets/new.json?api_key=' . $api_key;
 $curl = curl_init($playtoken);
 curl_setopt($curl, CURLOPT_URL,$playtoken);
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -29,12 +60,12 @@ curl_close($curl);
 
 $obj = json_decode($playid,true);
 
+ 
 //var_dump($obj);
 $token=$obj['play_token'];
 
 //GENERATE INITIAL PLAY LINK
-$playurl= 'http://8tracks.com/sets/'.$token.'/play?mix_id='.$playlistid.'&format=jsonh';
-//echo $playurl;
+$playurl= 'http://8tracks.com/sets/'.$token.'/play?mix_id='.$playlistid.'&format=jsonh&api_key=' . $api_key;
 
 $songcurl = curl_init($playurl);
 curl_setopt($songcurl, CURLOPT_URL,$playurl);
@@ -44,26 +75,8 @@ curl_close($songcurl);
 
 $obj = json_decode($songdata,true);
 
-if(isset($_POST["show"])&&$_POST["show"]=="Yes")
-{
-echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="description" content="Stay offline!" />
-
-<title> 8Tracks Playlist Downloader</title>
-<link rel="stylesheet" href="style/style.css" type="text/css"/>
-</head>
-<body>
-<div id="page">
-<div id="body">
-<div id="header">
- <img src="style/header.jpg" border="0" align="centre"/>
- </div><div align="center"><br/><br/>';
- 
-$plid='http://8tracks.com/mixes/'.$playlistid.'.json';
+// PLAYLIST INFO
+$plid='http://8tracks.com/mixes/'.$playlistid.'.json?api_key=' . $api_key;
 $albcurl = curl_init($plid);
 curl_setopt($albcurl, CURLOPT_URL,$plid);
 curl_setopt($albcurl, CURLOPT_RETURNTRANSFER, true);
@@ -72,45 +85,46 @@ curl_close($albcurl);
 
 $alb = json_decode($albdata,true);
 
-echo '<div class="title"><h3>'.$alb['mix']['name'].'</h3></div><br/><div class="desc"><h4>'.$alb['mix']['description'];
-echo '</h4></div><br/><br/><div class="myimg"><a href="http://8tracks.com'.$alb['mix']['path'].'"><img src="'.$alb['mix']['cover_urls']['sq133'].'"/></a></div><br/><br/>';
-echo '<div class="mytab"> <h3>Song List: </h3><br/><table border="1">';
-}
-else
-{
-//if (file_exists('songs/'.$playlistid.'.zip'))
-//header( 'Location: songs/'.$playlistid.'.zip' );
-//else
-//{
-//$zip = new ZipArchive();
-//$zip->open($playlistid.'.zip', ZipArchive::CREATE);
-//}
-}  
+$playlist_name = $alb['mix']['name'];
 
-$at_end='false';
+// CHECK AND CREATE THE DOWNLOADS FOLDER
+$thisdir = getcwd();
+if (!file_exists($thisdir."/downloads")){
+    if(mkdir( $thisdir . "/downloads" , 0777 )){
+        echo "<p>Created 'Downloads' folder in script directory.</p>\n";
+    } else {
+        die('Failed to create Downloads folder..');
+    }
+}
+
+// CHECK AND CREATE THE PLAYLIST FOLDER
+if (!file_exists($thisdir."/downloads/" . $playlist_name)){
+    if(mkdir( $thisdir . "/downloads/" . $playlist_name , 0777 )){
+        echo "<p>Created folder '" . $playlist_name . "' inside 'Downloads' directory.</p>\n";
+    } else {
+        die('Failed to create Playlist folder..');
+    }
+}
+
+echo "<n>Starting download..</p>\n";
+flush();
+
 //RECURSIVELY PLAY/DOWNLOAD SONGS
-while($at_end=='false')
+$at_end=false;
+$song_number=1;
+while(!$at_end)
 {
-//RIGHT NOW 8Tracks provides 64K and 48K ENCODING... I OBVIOUSLY PREFER 64K ENCODING
-//DUNNO HOW LONG THIS WILL LAST THOUGH... http://groups.google.com/group/8tracks-public-api/browse_thread/thread/14da42858b928b88#
-if($highq == 'yes')
-$song= str_replace("48k.v2.m4a","64k.m4a",$obj['set']['track']['url']);
-else
-$song=$obj['set']['track']['url'];
+$song=$obj['set']['track']['track_file_stream_url']; ### FIX: changed 'url' to 'track_file_stream_url'
 
-if(isset($_POST["show"])&&$_POST["show"]=="Yes")
-{
-echo '<tr><td><a href="'.$song.'">'.$obj['set']['track']['name'].'</a><br/>'.$obj['set']['track']['performer'].'</td></tr>';
-}
-else
-{
+### ADDED: downloading status.
+echo '<p>Downloading: ' . $obj['set']['track']['name'] . ' - ' . $obj['set']['track']['performer'] . ' from: ' . $song . "</p>\n";
+flush();
+        
 $songfile = file_get_contents($song);
-file_put_contents('songs/'.$obj['set']['track']['name'].'.m4a',$songfile);
-//$zip->addFile($songfile,$obj['set']['track']['name'].'.m4a');
-}
+file_put_contents($thisdir . '/downloads/' . $playlist_name. '/' . $song_number . ' - ' . $obj['set']['track']['performer']. ' - ' .$obj['set']['track']['name'].'.m4a',$songfile);
+
 //GET NEXT SONG
-$playurl= 'http://8tracks.com/sets/'.$token.'/next?mix_id='.$playlistid.'&format=jsonh';
-//echo $playurl;
+$playurl= 'http://8tracks.com/sets/'.$token.'/next?mix_id='.$playlistid.'&format=jsonh&api_key=' . $api_key;
 
 $songcurl = curl_init($playurl);
 curl_setopt($songcurl, CURLOPT_URL,$playurl);
@@ -119,28 +133,21 @@ $songdata = curl_exec($songcurl);
 curl_close($songcurl);
 
 $obj = json_decode($songdata,true);
-//unlink('songs/'.$obj['set']['track']['name'].'.m4a');
+
+$song_number += 1;
 
 //CHECK IF AT END OF PLAYLIST
 if($obj['set']['at_end'])
-$at_end= 'true';
+$at_end= true;
 
 }
-if(isset($_POST["show"])&&$_POST["show"]=="Yes")
-{
-echo '</table></div>
-</form>
-</div>
-</div>
-</div>
-</div>
-</body>
-</html> ';
-}
-else
-{
-	//$zip->close();
-	 //header( 'Location: /tmp/'.$playlistid.'.zip' ) ;
-}
+
+echo "<p>Done.</p>\n";
 
 ?>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body></html>

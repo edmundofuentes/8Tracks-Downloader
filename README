@@ -1,13 +1,25 @@
 ====== ABOUT =======
 8Tracks (http://8tracks.com) is by far the best music site I've ever used! The site UI is brilliant, the people are superb, and the music is awesomeness
-8Tracks in internet radio, so ideally you're **NOT** sposed to be able to download songs from the site!
-Thankfully though, it is very easy to get music from the site.
+8Tracks in internet radio, so ideally you're **NOT** supposed to be able to download songs from the site! Thankfully though, it is very easy to get music from the site.
 
-This is a simple Playlist downloader for 8Tracks
-<strike> Simply change the $playlist variable in index.php and run the file... It downloads the entire playlist to the "songs" folder</strike>
-Check Update
+This is a simple Playlist downloader for 8Tracks.
 
-Hack developed overnight using PHP+CURL+XAMPP and while listening to The Awkward Moment when the Remix is better than the Original... (http://8tracks.com/awhit10/the-awkward-moment-when-the-remix-is-better-than-the-original) :) :)
+INSTRUCTIONS:
+a. Initialize your web server. I recommend WAMP for Windows and MAMP Mac OS X because they are very simple and easy to set up.
+b. Copy the 8tracks-downloader folder to your web root folder.
+c. Make sure that the 8tracks-downloader permissions are set to 0777.
+
+1. Go to http://localhost/8tracks-downloader in your web browser.
+2. Type in the playlist's URL and your API Key (it must be valid), and click "Analyze".
+3. You can choose to download one by one (right-click on the song title and choose "Save As..") or all (click the button "Download All).
+4. Relax and let it do its magic.  
+5. When it has finished it'll say "Done." and your songs will be waiting in the "Downloads" folder inside "8tracks-downloader".
+
+
+BRANCH UPDATE (by mundofr):
+8tracks recently changed it's API policies and you are now required to authenticate with a valid API key. Changed all the requests to the new API.
+I also redesigned the script flow quite a bit, a new "analysis" page shows up with the playlist description and the song list, from there you can choose to download one-by-one or download all.
+The command line functionality has been completely removed.
 
 UPDATE:
 Added a UI (?). All you have to do is input playlist URL in homepage and click download! :)

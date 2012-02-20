@@ -24,6 +24,16 @@ text-align:center;
 vertical-align:bottom;
 }
 
+.playlistinfo
+{
+    width:80%;
+}
+
+.myimg
+{
+float:left;
+} 
+
 .title
 {
 text-decoration:none;color:#fff;text-transform: uppercase;
@@ -31,21 +41,13 @@ text-decoration:none;color:#fff;text-transform: uppercase;
 
 .desc
 {
-position:relative;
-top: -25	px;
 text-decoration:none;color:#fff;
 } 
-.myimg
-{
-position:relative;
-top:5%;
-left:-26%;
-} 
+
 
 .mytab
 {
 position:relative;
-top: -190px;
 } 
 
 
