@@ -116,12 +116,20 @@ while(!$at_end)
 {
 $song=$obj['set']['track']['track_file_stream_url']; ### FIX: changed 'url' to 'track_file_stream_url'
 
-### ADDED: downloading status.
-echo '<p>Downloading: ' . $obj['set']['track']['name'] . ' - ' . $obj['set']['track']['performer'] . ' from: ' . $song . "</p>\n";
-flush();
-        
-$songfile = file_get_contents($song);
-file_put_contents($thisdir . '/downloads/' . $playlist_name. '/' . $song_number . ' - ' . $obj['set']['track']['performer']. ' - ' .$obj['set']['track']['name'].'.m4a',$songfile);
+### ADDED: Check before if the song has already been downloaded
+$file = $thisdir . '/downloads/' . $playlist_name. '/' . $song_number . ' - ' . $obj['set']['track']['performer']. ' - ' .$obj['set']['track']['name'].'.m4a';
+
+if (file_exists($file)){
+    echo '<p>Skipping song ' . $song_number . '. File "' . $file . '" already exists in directory.';
+    flush();
+} else {
+    ### ADDED: downloading status.
+    echo '<p>Downloading: ' . $obj['set']['track']['name'] . ' - ' . $obj['set']['track']['performer'] . ' from: ' . $song . "</p>\n";
+    flush();
+            
+    $songfile = file_get_contents($song);
+    file_put_contents($file,$songfile);
+}
 
 //GET NEXT SONG
 $playurl= 'http://8tracks.com/sets/'.$token.'/next?mix_id='.$playlistid.'&format=jsonh&api_key=' . $api_key;
