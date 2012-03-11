@@ -29,12 +29,14 @@ Depending on various factors (such as your download speed, the number of songs i
 You might need to enable/install the cURL library. Try [this guide first](http://www.webtechquery.com/index.php/2010/03/fatal-error-call-to-undefined-function-curl_init-windows-and-linux-ubuntu/), it'll solve most problems related to cURL.
 
 ## Updates
-By mundofr:  
+**By mundofr:**
+
 * 8tracks recently changed it's API policies and you are now required to authenticate with a valid API key. Changed all the requests to the new API.  
 * I also redesigned the script flow quite a bit, a new "analysis" page shows up with the playlist description and the song list, from there you can choose to download one-by-one or download all.  
 * The command line functionality has been completely removed.
 
-By navinpai:  
+**By navinpai:**
+ 
 * Added a UI (?). All you have to do is input playlist URL in homepage and click download! :) Here's a peek at the simplified UI: http://brizzly.com/pic/4S3U   
 * 8Tracks used to provide 64K m4a (still does infact), though their primary server now encodes into 48K ...This provides smaller filesize, but less quality. So have added support for 64K encoded downloads.  
 * Updated UI: http://brizzly.com/pic/4S4Q (Just check HIGH QUALITY to download 64K m4a's)  
