@@ -1,5 +1,5 @@
 # 8tracks-Downloader
-This is a simple playlist downloader for [8tracks.com](http://8tracks.com).
+This is a simple playlist downloader for [8tracks.com](http://8tracks.com) that is based on proper API calls with a Dev Key.
 
 ## About
 [8tracks.com](http://8tracks.com) is by far the best music site I've ever used! The site UI is brilliant, the people are superb, and the music is pure awesomeness. 8tracks is internet radio, so ideally you're **NOT** supposed to be able to download songs from the site! Thankfully though, it can be done with a little hackery. ;-)
@@ -7,6 +7,7 @@ This is a simple playlist downloader for [8tracks.com](http://8tracks.com).
 ## Requirements
 * A webserver running locally.   
 I recommend WAMP for Windows and MAMP for Mac OS X because they are very simple and easy to set up.
+* A valid API Key from 8tracks.com. [Click here](http://8tracks.com/developers/new) to sign up for one.
 
 ## Installation
 1. Download the script and unzip it.
