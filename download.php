@@ -98,6 +98,7 @@ if (!file_exists($thisdir."/downloads")){
 }
 
 // CHECK AND CREATE THE PLAYLIST FOLDER
+$playlist_name = preg_replace("/[a-zA-Z0-9\s]/", "_", $playlist_name); // fixed by reddit user elmes3
 if (!file_exists($thisdir."/downloads/" . $playlist_name)){
     if(mkdir( $thisdir . "/downloads/" . $playlist_name , 0777 )){
         echo "<p>Created folder '" . $playlist_name . "' inside 'Downloads' directory.</p>\n";

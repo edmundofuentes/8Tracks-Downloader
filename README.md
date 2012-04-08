@@ -32,6 +32,7 @@ You might need to enable/install the cURL library. Try [this guide first](http:/
 ## Updates
 **By mundofr:**
 
+* Reddit user [elmes3](http://www.reddit.com/user/elmes3) solved an issue where the download wouldn't start if the playlist name contained invalid characters for a folder name.
 * 8tracks recently changed it's API policies and you are now required to authenticate with a valid API key. Changed all the requests to the new API.  
 * I also redesigned the script flow quite a bit, a new "analysis" page shows up with the playlist description and the song list, from there you can choose to download one-by-one or download all.  
 * The command line functionality has been completely removed.
