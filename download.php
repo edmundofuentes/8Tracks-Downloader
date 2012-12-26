@@ -29,6 +29,26 @@
                 Cum sociis natoque penatibus et magnis dis parturient montes,
                 nascetur ridiculus mus. Curabitur blandit bibendum metus,
                 quis imperdiet ligula eleifend eget.
+                
+                Cras condimentum auctor ipsum, at porta justo viverra quis.
+                Curabitur semper velit quis nisi pulvinar fringilla. Aenean non
+                dapibus mauris. Nullam eros purus, pellentesque id tempor sed,
+                pellentesque ac ipsum. Pellentesque euismod sodales faucibus. Aliquam s
+                odales tempor tristique. Nam imperdiet pretium suscipit.
+
+                Curabitur rutrum consequat nisl, ac imperdiet justo porttitor quis.
+                Aliquam at euismod massa. In non odio orci. Praesent posuere iaculis
+                rhoncus. Etiam ultrices risus ut leo tempor condimentum ut ut nisl. Mauris
+                velit massa, facilisis sit amet fermentum ut, semper eget tortor.
+                Donec sollicitudin ante nec nisi faucibus at imperdiet magna molestie.
+                Vivamus convallis congue risus, sed vehicula turpis sagittis ac.
+                Quisque faucibus purus in metus ultricies posuere. Curabitur sit
+                amet dolor quis libero porta dignissim. In felis libero, porta accumsan
+                pulvinar at, pellentesque in erat. Vivamus malesuada pharetra tellus,
+                sed elementum libero posuere vel. Quisque felis lacus, scelerisque eu
+                venenatis ac, fermentum eu justo. Sed tincidunt nulla sed augue rhoncus
+                ac viverra tellus blandit. Nam quis nulla sem. Fusce eget purus at
+                ligula lacinia pulvinar ut sed magna.
                 -->
 
 <?php
@@ -36,6 +56,10 @@
 // by: mundofr http://github.com/mundofr
 // feb 2012
 
+# Thanks to redditor elmes3 for the fix
+function sanitize($string){
+    return preg_replace("/[^a-zA-Z0-9\s]/", "_", $string);
+}
 
 //FIND PLAYLIST ID FROM PLAYLIST URL
 $playlist= isset($_POST['playlist'])? $_POST['playlist'] : 0;
@@ -98,7 +122,7 @@ if (!file_exists($thisdir."/downloads")){
 }
 
 // CHECK AND CREATE THE PLAYLIST FOLDER
-$playlist_name = preg_replace("/[a-zA-Z0-9\s]/", "_", $playlist_name); // fixed by reddit user elmes3
+$playlist_name = sanitize($playlist_name);
 if (!file_exists($thisdir."/downloads/" . $playlist_name)){
     if(mkdir( $thisdir . "/downloads/" . $playlist_name , 0777 )){
         echo "<p>Created folder '" . $playlist_name . "' inside 'Downloads' directory.</p>\n";
@@ -118,7 +142,7 @@ while(!$at_end)
 $song=$obj['set']['track']['track_file_stream_url']; ### FIX: changed 'url' to 'track_file_stream_url'
 
 ### ADDED: Check before if the song has already been downloaded
-$file = $thisdir . '/downloads/' . $playlist_name. '/' . $song_number . ' - ' . $obj['set']['track']['performer']. ' - ' .$obj['set']['track']['name'].'.m4a';
+$file = $thisdir . '/downloads/' . $playlist_name. '/' . $song_number . ' - ' . sanitize( $obj['set']['track']['performer'] ). ' - ' .sanitize( $obj['set']['track']['name'] ).'.m4a';
 
 if (file_exists($file)){
     echo '<p>Skipping song ' . $song_number . '. File "' . $file . '" already exists in directory.';

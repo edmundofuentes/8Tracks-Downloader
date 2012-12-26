@@ -1,23 +1,32 @@
 # 8tracks-Downloader
-This is a simple playlist downloader for [8tracks.com](http://8tracks.com) that is based on proper API calls with a valid Dev Key.
+This is a simple playlist downloader for [8tracks.com](http://8tracks.com) that is based on proper API calls with a valid Dev API Key.
 
 ## About
 [8tracks.com](http://8tracks.com) is by far the best music site I've ever used! The site UI is brilliant, the people are superb, and the music is pure awesomeness. 8tracks is internet radio, so ideally you're **NOT** supposed to be able to download songs from the site! Thankfully though, it can be done with a little hackery. ;-)
 
 ## Requirements
+* A valid API Key from 8tracks.com. [Click here](http://8tracks.com/developers/new) to sign up for one.
+* PHP 5.4 running on Mac OS X for a [simpler installation](https://github.com/mundofr/8Tracks-Downloader#stand-alone-application).
+Or,
 * A webserver running locally.   
 I recommend WAMP for Windows and MAMP for Mac OS X because they are very simple and easy to set up.
-* A valid API Key from 8tracks.com. [Click here](http://8tracks.com/developers/new) to sign up for one.
 
+# Stand-alone Application
+Mac OS X only, requires PHP 5.4+ (to upgrade your PHP installation [check this](http://php-osx.liip.ch/) recommended packages.)
+## Installation
+1. Download the script and unzipt it.
+2. Double click the "Launch.app" icon.
+
+# Webserver Installation
 ## Installation
 1. Download the script and unzip it.
 2. Rename the extracted folder to "8tracks-downloader" and copy it into your web root folder.
 3. Make sure that the "8tracks-downloader" folder's permissions are set to 0777.
 
-## Instructions
+# Instructions
 1. Go to [http://localhost/8tracks-downloader](http://localhost/8tracks-downloader) in your web browser.
 2. Type in the playlist's URL and your API Key (it must be valid), and click "Analyze".
-3. You can choose to download one by one (right-click on the song title and choose "Save As..") or all (click the button "Download All).
+3. You can choose to download one by one (right-click on the song title and choose "Save As..") or all (click the button "Download All").
 4. Relax and let it do its magic.  
 5. When it has finished it'll say "Done." and your songs will be waiting in the "Downloads" folder inside "8tracks-downloader". Sweet.
 
@@ -32,6 +41,7 @@ You might need to enable/install the cURL library. Try [this guide first](http:/
 ## Updates
 **By mundofr:**
 
+* Created an AppleScript applet for Mac OS X to launch a self-contained version of the script for easier installation, but it requires PHP 5.4+ to be installed in Mac OS X, which is not yet installed by default on Mountain Lion.
 * Reddit user [elmes3](http://www.reddit.com/user/elmes3) solved an issue where the download wouldn't start if the playlist name contained invalid characters for a folder name.
 * 8tracks recently changed it's API policies and you are now required to authenticate with a valid API key. Changed all the requests to the new API.  
 * I also redesigned the script flow quite a bit, a new "analysis" page shows up with the playlist description and the song list, from there you can choose to download one-by-one or download all.  
