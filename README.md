@@ -7,18 +7,17 @@ This is a simple playlist downloader for [8tracks.com](http://8tracks.com) that 
 ## Requirements
 * A valid API Key from 8tracks.com. [Click here](http://8tracks.com/developers/new) to sign up for one.
 * PHP 5.4 running on Mac OS X for a [simpler installation](https://github.com/mundofr/8Tracks-Downloader#stand-alone-application).
+
 Or,
 * A webserver running locally.   
 I recommend WAMP for Windows and MAMP for Mac OS X because they are very simple and easy to set up.
 
-# Stand-alone Application
+## Stand-alone Application
 Mac OS X only, requires PHP 5.4+ (to upgrade your PHP installation [check this](http://php-osx.liip.ch/) recommended packages.)
-## Installation
 1. Download the script and unzipt it.
 2. Double click the "Launch.app" icon.
 
-# Webserver Installation
-## Installation
+## Webserver Installation
 1. Download the script and unzip it.
 2. Rename the extracted folder to "8tracks-downloader" and copy it into your web root folder.
 3. Make sure that the "8tracks-downloader" folder's permissions are set to 0777.
