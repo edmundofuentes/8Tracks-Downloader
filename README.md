@@ -14,6 +14,7 @@ I recommend WAMP for Windows and MAMP for Mac OS X because they are very simple 
 
 ## Stand-alone Application
 Mac OS X only, requires PHP 5.4+ (to upgrade your PHP installation [check this](http://php-osx.liip.ch/) recommended packages.)
+
 1. Download the script and unzipt it.
 2. Double click the "Launch.app" icon.
 
