@@ -51,6 +51,13 @@ echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www
 
 <title> 8Tracks Playlist Downloader</title>
 <link rel="stylesheet" href="style/style.css" type="text/css"/>
+
+<script language="JavaScript" type="text/javascript">
+    function downloadPopup() {
+        alert(\'Download starting..\nDepending on your browser, you may or may not see the download progress. Do not close this window until you see the "Download finished" message.\');
+    }
+</script>
+
 </head>
 <body>
 <div id="page">
@@ -71,19 +78,20 @@ $alb = json_decode($albdata,true);
 
 echo '
 <div class="playlistinfo" align="left">
-    <form id="form" action="download.php" method="post">
+    <form id="form" action="download.php" method="post" onSubmit="return downloadPopup();">
             <input type="hidden" name="api_key" value="'. $api_key . '" />
             <input type="hidden" name="playlist" value="'. $playlist .'" />
     
         <span class="myimg" style="padding-right:15px;">
             <a href="http://8tracks.com'.$alb['mix']['path'].'"><img src="'.$alb['mix']['cover_urls']['sq133'].'"/></a>
-            <br/><p><input type="submit" style="width:133px;!important" value="DOWNLOAD ALL" /></p>
+            <br/><p><input type="submit" style="width:133px;!important" value="DOWNLOAD ALL"/></p>
         </span>
         <div class="title"><h3>'.$alb['mix']['name'].' by '. $alb['mix']['user']['login'] .'</h3></div><br/>
         <div class="desc"><h4>'.$alb['mix']['description'] . '</h4><br/></div>
         <div class="desc">
             <p>Right-click on the name of the song and select "Save As.." to download
-            each song individually or click the button to download all the songs to disk.</p>
+            each song individually or click the button on the left to download all the songs to disk.
+            </p>
         </div>  
     </form>
 </div>

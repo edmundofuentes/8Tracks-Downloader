@@ -16,6 +16,7 @@
         </div>
         <div align="center"><br/><br/>
             <div class="desc">
+                
                 <!-- TRICK BROWSER TO SHOW PAGE BEFORE LOADING...
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                 Maecenas aliquam leo a nulla volutpat sit amet egestas nunc tincidunt.
@@ -142,7 +143,7 @@ while(!$at_end)
 $song=$obj['set']['track']['track_file_stream_url']; ### FIX: changed 'url' to 'track_file_stream_url'
 
 ### ADDED: Check before if the song has already been downloaded
-$file = $thisdir . '/downloads/' . $playlist_name. '/' . $song_number . ' - ' . sanitize( $obj['set']['track']['performer'] ). ' - ' .sanitize( $obj['set']['track']['name'] ).'.m4a';
+$file = $thisdir . '/downloads/' . $playlist_name. '/' . $song_number . ' - ' . sanitize( $obj['set']['track']['performer'] ). ' - ' . sanitize( $obj['set']['track']['name'] ) .'.m4a';
 
 if (file_exists($file)){
     echo '<p>Skipping song ' . $song_number . '. File "' . $file . '" already exists in directory.';
@@ -175,10 +176,10 @@ $at_end= true;
 
 }
 
-echo "<p>Done.</p>\n";
+echo "<p>Download finished.</p>\n";
 
 ?>
-
+<p><br/><a href="index.php">- Start Over -</a></p>
             </div>
         </div>
     </div>
