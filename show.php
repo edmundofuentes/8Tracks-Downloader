@@ -54,7 +54,7 @@ echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www
 
 <script language="JavaScript" type="text/javascript">
     function downloadPopup() {
-        alert(\'Download starting..\nDepending on your browser, you may or may not see the download progress. Do not close this window until you see the "Download finished" message.\');
+        alert(\'Download starting..\nDepending on your browser, you may or may not see the download progress. Do not close this window until you see the "Download finished" message. Press OK to continue.\');
     }
 </script>
 
